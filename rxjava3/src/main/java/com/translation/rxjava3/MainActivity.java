@@ -24,6 +24,7 @@ import io.reactivex.rxjava3.core.ObservableSource;
 import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.core.Scheduler;
 import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.functions.Action;
 import io.reactivex.rxjava3.functions.Consumer;
 import io.reactivex.rxjava3.functions.Function;
 import io.reactivex.rxjava3.internal.schedulers.SchedulerWhen;
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
                 fromFuture();
                 flatMap();
                 testSubscriptionOn();
+                test();
             }
         });
     }
@@ -312,5 +314,53 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                 });
+    }
+
+    private void test(){
+        Observable.create(new ObservableOnSubscribe<String>() {
+            @Override
+            public void subscribe(@NonNull ObservableEmitter<String> emitter) throws Throwable {
+                emitter.onNext("1111");
+                emitter.onNext("2222");
+                Log.i("jiao","subscribe accept thead id="+Thread.currentThread().getId());
+            }
+        })
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnNext(new Consumer<String>() {
+                    @Override
+                    public void accept(String s) throws Throwable {
+                        Log.i("jiao","doOnNext accept thead id="+Thread.currentThread().getId());
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(new Consumer<Disposable>() {
+                    @Override
+                    public void accept(Disposable disposable) throws Throwable {
+                        Log.i("jiao","doOnSubscribe accept thead id="+Thread.currentThread().getId());
+                    }
+                })
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(@NonNull String s) {
+                Log.i("jiao","onNext accept thead id="+Thread.currentThread().getId());
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
     }
 }
