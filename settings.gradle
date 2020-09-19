@@ -1,2 +1,5 @@
+include ':rxjava3'
+include ':javajetpack'
+include ':jetpack'
 include ':app'
 rootProject.name = "TranslationActivity"
