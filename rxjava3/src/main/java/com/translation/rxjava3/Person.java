@@ -7,6 +7,9 @@ class Person {
     private String name;
     private List<Plan> planList = new ArrayList<>();
 
+    public Person() {
+    }
+
     public Person(String name, List<Plan> planList) {
         this.name = name;
         this.planList = planList;

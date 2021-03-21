@@ -1,3 +1,7 @@
+include ':shopcartanimation'
+include ':kotlin'
+include ':rxjava1'
+include ':EditTextModel'
 include ':rxjava3'
 include ':javajetpack'
 include ':jetpack'
