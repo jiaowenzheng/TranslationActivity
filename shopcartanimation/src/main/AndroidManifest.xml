@@ -22,6 +22,8 @@
         <activity android:name=".popmenu.PopupActivity"/>
         <activity android:name=".recycler.RecyclerViewActivity"/>
         <activity android:name=".auto_wrap_text.AutoWrapTextViewActivity"/>
+        <activity android:name=".animation.RotateActivity"/>
+        <activity android:name=".animation.AlphaRotateActivity"/>
     </application>
 
 </manifest>

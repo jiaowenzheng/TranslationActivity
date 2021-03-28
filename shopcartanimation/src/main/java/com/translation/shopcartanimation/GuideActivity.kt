@@ -6,6 +6,8 @@ import android.text.TextUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.flexbox.*
+import com.translation.shopcartanimation.animation.AlphaRotateActivity
+import com.translation.shopcartanimation.animation.RotateActivity
 import com.translation.shopcartanimation.auto_wrap_text.AutoWrapTextViewActivity
 import com.translation.shopcartanimation.expand.ExpandTextViewActivity
 import com.translation.shopcartanimation.popmenu.PopupActivity
@@ -44,7 +46,7 @@ class GuideActivity : AppCompatActivity() {
     }
 
     private fun getItem(): List<String>{
-        return arrayListOf("PopMenu", "ExpandTextView", "FlexboxLayoutManager","AutoWrapTextView")
+        return arrayListOf("PopMenu", "ExpandTextView", "FlexboxLayoutManager","AutoWrapTextView","Rotate","AlphaRotate")
     }
 
     private fun itemClick(item: String){
@@ -53,6 +55,8 @@ class GuideActivity : AppCompatActivity() {
             "ExpandTextView" -> startTargetActivity(ExpandTextViewActivity::class)
             "FlexboxLayoutManager" -> startTargetActivity(RecyclerViewActivity::class)
             "AutoWrapTextView" -> startTargetActivity(AutoWrapTextViewActivity::class)
+            "Rotate" -> startTargetActivity(RotateActivity::class)
+            "AlphaRotate" -> startTargetActivity(AlphaRotateActivity::class)
         }
     }
 
