@@ -29,4 +29,5 @@
         <attr name="endText" format="string"/>
     </declare-styleable>
 
+
 </resources>

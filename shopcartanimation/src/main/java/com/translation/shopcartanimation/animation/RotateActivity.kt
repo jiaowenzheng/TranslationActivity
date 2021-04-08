@@ -16,7 +16,7 @@ class RotateActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_rotate)
+        setContentView(R.layout.activity_social_rotate)
 
         val rotateIv = findViewById<ImageView>(R.id.iv_guide_circle)
 

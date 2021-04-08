@@ -2,12 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.translation.shopcartanimation">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
         android:theme="@style/Theme.TranslationActivity">
         <activity android:name=".GuideActivity">
             <intent-filter>
@@ -24,6 +27,8 @@
         <activity android:name=".auto_wrap_text.AutoWrapTextViewActivity"/>
         <activity android:name=".animation.RotateActivity"/>
         <activity android:name=".animation.AlphaRotateActivity"/>
+        <activity android:name=".rebound.DialogAnimationActivity"/>
+        <activity android:name=".rebound.SpringActivity"/>
     </application>
 
 </manifest>

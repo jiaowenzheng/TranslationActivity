@@ -2,6 +2,9 @@ package com.translation.shopcartanimation.animation
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
+import android.animation.ValueAnimator.RESTART
+import android.animation.ValueAnimator.REVERSE
 import android.os.Bundle
 import android.view.View
 import android.view.animation.LinearInterpolator
@@ -35,13 +38,16 @@ class AlphaRotateActivity : AppCompatActivity() {
         val rotateFirst = ObjectAnimator.ofFloat(view, View.ROTATION,0f,360f)
         rotateFirst.duration = 5000
         rotateFirst.interpolator = LinearInterpolator()
+        rotateFirst.repeatCount = -1
         return rotateFirst
     }
 
     private fun createAlphaAnimation(view: View, from: Float, to: Float): ObjectAnimator{
         val alphaFirst = ObjectAnimator.ofFloat(view,View.ALPHA,from,to)
-        alphaFirst.duration = 5000
+        alphaFirst.duration = 2000
         alphaFirst.interpolator = LinearInterpolator()
+        alphaFirst.repeatCount = -1
+        alphaFirst.repeatMode = REVERSE
         return alphaFirst
     }
 
