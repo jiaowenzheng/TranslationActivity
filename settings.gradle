@@ -4,6 +4,5 @@ include ':rxjava1'
 include ':EditTextModel'
 include ':rxjava3'
 include ':javajetpack'
-include ':jetpack'
 include ':app'
 rootProject.name = "TranslationActivity"
