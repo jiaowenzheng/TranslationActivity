@@ -1,4 +1,4 @@
-include ':shopcartanimation'
+include ':TestSample'
 include ':kotlin'
 include ':rxjava1'
 include ':EditTextModel'
