@@ -12,6 +12,7 @@ import com.translation.sample.auto_wrap_text.AutoWrapTextViewActivity
 import com.translation.sample.rebound.DialogAnimationActivity
 import com.translation.sample.rebound.SpringActivity
 import com.translation.sample.expand.ExpandTextViewActivity
+import com.translation.sample.impl.OnRecyclerItemClickListener
 import com.translation.sample.popmenu.PopupActivity
 import com.translation.sample.recycler.RecyclerViewActivity
 import java.util.regex.Pattern

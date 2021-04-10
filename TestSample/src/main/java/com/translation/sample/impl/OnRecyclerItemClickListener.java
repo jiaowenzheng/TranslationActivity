@@ -1,4 +1,4 @@
-package com.translation.sample;
+package com.translation.sample.impl;
 
 import android.view.GestureDetector;
 import android.view.MotionEvent;
