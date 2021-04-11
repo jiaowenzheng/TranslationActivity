@@ -13,6 +13,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/EditTextModel" />
+            <option value="$PROJECT_DIR$/MQTT" />
             <option value="$PROJECT_DIR$/TestSample" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/javajetpack" />

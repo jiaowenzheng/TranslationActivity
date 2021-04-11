@@ -1,3 +1,4 @@
+include ':MQTT'
 include ':TestSample'
 include ':kotlin'
 include ':rxjava1'
