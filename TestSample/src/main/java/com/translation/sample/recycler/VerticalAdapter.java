@@ -44,7 +44,6 @@ class VerticalAdapter extends BaseQuickAdapter<Entity, BaseViewHolder> {
         flexboxLayoutManager.setAlignItems(AlignItems.CENTER);
         flexboxLayoutManager.setJustifyContent(JustifyContent.FLEX_START);
 
-
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(flexboxLayoutManager);
         recyclerView.setNestedScrollingEnabled(false);

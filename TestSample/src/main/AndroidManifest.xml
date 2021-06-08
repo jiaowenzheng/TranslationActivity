@@ -29,6 +29,9 @@
         <activity android:name="com.translation.sample.animation.AlphaRotateActivity"/>
         <activity android:name="com.translation.sample.rebound.DialogAnimationActivity"/>
         <activity android:name="com.translation.sample.rebound.SpringActivity"/>
+        <activity android:name=".view_pager.BounceViewPagerActivity"/>
+        <activity android:name=".text_stroke.TextViewStrokeActivity"/>
+        <activity android:name=".menu.PopMenuActivity"/>
     </application>
 
 </manifest>

@@ -13,8 +13,12 @@ import com.translation.sample.rebound.DialogAnimationActivity
 import com.translation.sample.rebound.SpringActivity
 import com.translation.sample.expand.ExpandTextViewActivity
 import com.translation.sample.impl.OnRecyclerItemClickListener
+import com.translation.sample.menu.PopMenuActivity
 import com.translation.sample.popmenu.PopupActivity
 import com.translation.sample.recycler.RecyclerViewActivity
+import com.translation.sample.text_stroke.TextViewStrokeActivity
+import com.translation.sample.view_pager.BounceViewPagerActivity
+import com.translation.sample.widget.BounceBackViewPager
 import java.util.regex.Pattern
 import kotlin.reflect.KClass
 
@@ -49,13 +53,13 @@ class GuideActivity : AppCompatActivity() {
     }
 
     private fun getItem(): List<String>{
-        return arrayListOf("PopMenu", "ExpandTextView", "FlexboxLayoutManager","AutoWrapTextView","Rotate",
-            "AlphaRotate","DialogAnimation","SpringActivity")
+        return arrayListOf("Popup", "ExpandTextView", "FlexboxLayoutManager","AutoWrapTextView","Rotate",
+            "AlphaRotate","DialogAnimation","SpringActivity","BounceViewPager","TextViewStroke","PopMenu")
     }
 
     private fun itemClick(item: String){
         when(item){
-            "PopMenu" -> startTargetActivity(PopupActivity::class)
+            "Popup" -> startTargetActivity(PopupActivity::class)
             "ExpandTextView" -> startTargetActivity(ExpandTextViewActivity::class)
             "FlexboxLayoutManager" -> startTargetActivity(RecyclerViewActivity::class)
             "AutoWrapTextView" -> startTargetActivity(AutoWrapTextViewActivity::class)
@@ -63,6 +67,9 @@ class GuideActivity : AppCompatActivity() {
             "AlphaRotate" -> startTargetActivity(AlphaRotateActivity::class)
             "DialogAnimation" -> startTargetActivity(DialogAnimationActivity::class)
             "SpringActivity" -> startTargetActivity(SpringActivity::class)
+            "BounceViewPager" -> startTargetActivity(BounceViewPagerActivity::class)
+            "TextViewStroke" -> startTargetActivity(TextViewStrokeActivity::class)
+            "PopMenu" -> startTargetActivity(PopMenuActivity::class)
         }
     }
 
