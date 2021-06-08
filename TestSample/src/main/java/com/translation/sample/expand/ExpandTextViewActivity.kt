@@ -16,4 +16,5 @@ class ExpandTextViewActivity : AppCompatActivity(){
         textView.text = "功哥可萝莉三叶草哥阿里卡功哥可萝莉三叶草哥阿里卡功哥可萝莉三叶草哥阿里卡功哥可萝莉三" +
                 "叶草哥阿里卡功哥可萝莉三叶草哥阿里卡功哥可萝莉三叶草哥阿里卡草哥阿里卡功哥可萝莉三叶草哥阿里卡"
     }
+
 }

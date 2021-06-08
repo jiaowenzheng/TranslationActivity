@@ -32,6 +32,8 @@
         <activity android:name=".view_pager.BounceViewPagerActivity"/>
         <activity android:name=".text_stroke.TextViewStrokeActivity"/>
         <activity android:name=".menu.PopMenuActivity"/>
+        <activity android:name="com.translation.sample.behavior.FlingBehaviorActivity"/>
+        <activity android:name="com.translation.sample.behavior.ViewPagerFlingActivity"/>
     </application>
 
 </manifest>

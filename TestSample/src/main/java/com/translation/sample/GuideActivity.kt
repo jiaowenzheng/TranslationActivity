@@ -9,6 +9,8 @@ import com.google.android.flexbox.*
 import com.translation.sample.animation.AlphaRotateActivity
 import com.translation.sample.animation.RotateActivity
 import com.translation.sample.auto_wrap_text.AutoWrapTextViewActivity
+import com.translation.sample.behavior.FlingBehaviorActivity
+import com.translation.sample.behavior.ViewPagerFlingActivity
 import com.translation.sample.rebound.DialogAnimationActivity
 import com.translation.sample.rebound.SpringActivity
 import com.translation.sample.expand.ExpandTextViewActivity
@@ -53,8 +55,11 @@ class GuideActivity : AppCompatActivity() {
     }
 
     private fun getItem(): List<String>{
-        return arrayListOf("Popup", "ExpandTextView", "FlexboxLayoutManager","AutoWrapTextView","Rotate",
-            "AlphaRotate","DialogAnimation","SpringActivity","BounceViewPager","TextViewStroke","PopMenu")
+        return arrayListOf(
+            "PopMenu", "ExpandTextView", "FlexboxLayoutManager",
+            "AutoWrapTextView", "Rotate", "AlphaRotate", "DialogAnimation", "SpringActivity",
+            "BounceViewPager", "TextViewStroke", "PopMenu", "behavior", "viewPageBehavior"
+        )
     }
 
     private fun itemClick(item: String){
@@ -70,6 +75,8 @@ class GuideActivity : AppCompatActivity() {
             "BounceViewPager" -> startTargetActivity(BounceViewPagerActivity::class)
             "TextViewStroke" -> startTargetActivity(TextViewStrokeActivity::class)
             "PopMenu" -> startTargetActivity(PopMenuActivity::class)
+            "behavior" -> startTargetActivity(FlingBehaviorActivity::class)
+            "viewPageBehavior" -> startTargetActivity(ViewPagerFlingActivity::class)
         }
     }
 
