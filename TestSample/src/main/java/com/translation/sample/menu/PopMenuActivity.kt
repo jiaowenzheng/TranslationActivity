@@ -11,11 +11,17 @@ import android.os.Handler
 import android.util.Log
 import android.util.TypedValue
 import android.view.View
+import android.view.ViewGroup
+import android.view.ViewTreeObserver
 import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.animation.Animation
+import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.addListener
 import androidx.core.os.postDelayed
+import androidx.core.view.marginBottom
 import com.translation.sample.R
+import java.lang.reflect.TypeVariable
 
 
 class PopMenuActivity : AppCompatActivity() ,View.OnClickListener{
@@ -41,6 +47,11 @@ class PopMenuActivity : AppCompatActivity() ,View.OnClickListener{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pop_menu)
 
+        maxHeight = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,200f,resources.displayMetrics).toInt()
+        minHeight = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,50f,resources.displayMetrics).toInt()
+        radius = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,35f,resources.displayMetrics)
+        space = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,20f,resources.displayMetrics).toInt()
+
         popMenu1View = findViewById(R.id.tv_pop_menu_1)
         popMenu2View = findViewById(R.id.tv_pop_menu_2)
         popMenu3View = findViewById(R.id.tv_pop_menu_3)
@@ -48,22 +59,22 @@ class PopMenuActivity : AppCompatActivity() ,View.OnClickListener{
         blackBackgroundView = findViewById(R.id.black_bg)
 
         //四个Menu 背景
-        popMenu1View.background = createMenuBackground()
-        popMenu2View.background = createMenuBackground()
-        popMenu3View.background = createMenuBackground()
-        popMenu4View.background = createMenuBackground()
+        popMenu1View.background = createMenuBackground(radius)
+        popMenu2View.background = createMenuBackground(radius)
+        popMenu3View.background = createMenuBackground(radius)
+        popMenu4View.background = createMenuBackground(radius)
 
         popMenuViewList.add(popMenu4View)
         popMenuViewList.add(popMenu3View)
         popMenuViewList.add(popMenu2View)
 
-        maxHeight = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,200f,resources.displayMetrics).toInt()
-        minHeight = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,50f,resources.displayMetrics).toInt()
-        radius = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,35f,resources.displayMetrics)
-        space = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,20f,resources.displayMetrics).toInt()
-
-        val size = popMenuViewList.size
-        totalHeight = size * popMenu2View.height + size * space
+        popMenu1View.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener{
+            override fun onGlobalLayout() {
+                popMenu1View.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                val size = popMenuViewList.size
+                totalHeight = size * popMenu2View.height + size * space
+            }
+        })
 
         //背景
         blackBackgroundView.background = GradientDrawable().apply {
@@ -77,14 +88,12 @@ class PopMenuActivity : AppCompatActivity() ,View.OnClickListener{
         popMenu4View.setOnClickListener(this)
     }
 
-    private fun createMenuBackground(): Drawable {
+    private fun createMenuBackground(radius: Float): Drawable {
         return GradientDrawable().apply {
             cornerRadius = radius
             setColor(Color.WHITE)
-            setStroke(2,Color.BLACK)
         }
     }
-
 
     private fun heightAnimation(targetView: View,startHeight: Int,endHeight: Int) {
         val valueAnimator = ValueAnimator.ofInt(startHeight, endHeight)
@@ -107,7 +116,7 @@ class PopMenuActivity : AppCompatActivity() ,View.OnClickListener{
 
         valueAnimator.interpolator = AccelerateDecelerateInterpolator()
         valueAnimator.setTarget(targetView)
-        valueAnimator.duration = 500
+        valueAnimator.duration = 300
         valueAnimator.start()
     }
 
@@ -120,19 +129,57 @@ class PopMenuActivity : AppCompatActivity() ,View.OnClickListener{
                     heightAnimation(blackBackgroundView,minHeight,maxHeight)
                 }
             }
-            R.id.tv_pop_menu_1 -> {
-                showMenuAnimation()
+            R.id.tv_pop_menu_1, R.id.tv_pop_menu_2,R.id.tv_pop_menu_3,R.id.tv_pop_menu_3-> {
+//                heightAnimation(blackBackgroundView,minHeight,maxHeight)
+//                toggleView()
+
+                widthAnimation()
             }
-            R.id.tv_pop_menu_2 -> {
-                showMenuAnimation()
-            }
-            R.id.tv_pop_menu_3 -> {
-                showMenuAnimation()
-            }
-            R.id.tv_pop_menu_3 -> {
-                showMenuAnimation()
+        }
+    }
+
+    private fun widthAnimation(){
+        val startWidth = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,90f,resources.displayMetrics).toInt()
+        val endWidth = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,110f,resources.displayMetrics).toInt()
+        val margin = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,10f,resources.displayMetrics).toInt()
+        val offset = startWidth / endWidth
+
+        val valueAnimator = ObjectAnimator.ofInt(startWidth, endWidth)
+        valueAnimator.addUpdateListener {
+            val marginBottom = (1 - it.animatedFraction) * margin
+            val params = blackBackgroundView.layoutParams as RelativeLayout.LayoutParams
+            params.width = it.animatedValue as Int
+            blackBackgroundView.layoutParams = params
+            Log.i("jiao"," valueAnimator endWidth=${it.animatedValue} marginBottom=$marginBottom")
+        }
+        valueAnimator.addListener(object : Animator.AnimatorListener{
+            override fun onAnimationStart(animation: Animator?) {
+
             }
 
+            override fun onAnimationEnd(animation: Animator?) {
+                heightAnimation(blackBackgroundView,minHeight,totalHeight + popMenu1View.height + 30)
+                toggleView()
+            }
+
+            override fun onAnimationCancel(animation: Animator?) {
+
+            }
+
+            override fun onAnimationRepeat(animation: Animator?) {
+
+            }
+
+        })
+        valueAnimator.duration = 300
+        valueAnimator.start()
+    }
+
+    private fun toggleView(){
+        if (isExpand){
+            closeMenuAnimation()
+        }else{
+            showMenuAnimation()
         }
     }
 
@@ -146,7 +193,7 @@ class PopMenuActivity : AppCompatActivity() ,View.OnClickListener{
             Log.i("jiao","showMenuAnimation i=$i")
             val view = popMenuViewList[i]
             view.visibility = View.INVISIBLE
-            Handler().postDelayed({
+            Handler().post{
                 view.visibility = View.VISIBLE
                 var height = totalHeight
 
@@ -154,25 +201,22 @@ class PopMenuActivity : AppCompatActivity() ,View.OnClickListener{
                     height = totalHeight - view.height * i - (space * i)
                 }
 
-                translationAnimation(view,-height.toFloat(),200)
-            }, (i * 50).toLong())
+                Log.i("jiao","showMenuAnimation height = $height totalHeight=$totalHeight")
+
+                translationAnimation(view,-height.toFloat(),300)
+            }
         }
     }
 
     private fun closeMenuAnimation(){
-        val size = popMenuViewList.size
-        for (i in size downTo 0 step 1){
-
-            val view = popMenuViewList[i]
-
-            Handler().postDelayed({
+        for (view in popMenuViewList){
+            Handler().post{
                 view.visibility = View.VISIBLE
 
-                translationAnimation(view,0f,200)
-            }, (i * 50).toLong())
+                translationAnimation(view,0f,300)
+            }
         }
-
-
+        isExpand = false
     }
 
     private fun translationAnimation(view: View,endY: Float,duration: Long) {
@@ -180,24 +224,7 @@ class PopMenuActivity : AppCompatActivity() ,View.OnClickListener{
             setDuration(duration)
             interpolator = AccelerateDecelerateInterpolator()
         }
-        objectAnimator.addListener(object : Animator.AnimatorListener {
-            override fun onAnimationStart(animation: Animator?) {
-                TODO("Not yet implemented")
-            }
 
-            override fun onAnimationEnd(animation: Animator?) {
-                TODO("Not yet implemented")
-            }
-
-            override fun onAnimationCancel(animation: Animator?) {
-                TODO("Not yet implemented")
-            }
-
-            override fun onAnimationRepeat(animation: Animator?) {
-                TODO("Not yet implemented")
-            }
-
-        })
         objectAnimator.start()
     }
 

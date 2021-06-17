@@ -16,8 +16,10 @@ import com.translation.sample.rebound.SpringActivity
 import com.translation.sample.expand.ExpandTextViewActivity
 import com.translation.sample.impl.OnRecyclerItemClickListener
 import com.translation.sample.menu.PopMenuActivity
+import com.translation.sample.menu.PopupWindowActivity
 import com.translation.sample.popmenu.PopupActivity
 import com.translation.sample.recycler.RecyclerViewActivity
+import com.translation.sample.shadow.ShadowButtonActivity
 import com.translation.sample.text_stroke.TextViewStrokeActivity
 import com.translation.sample.view_pager.BounceViewPagerActivity
 import com.translation.sample.widget.BounceBackViewPager
@@ -58,7 +60,8 @@ class GuideActivity : AppCompatActivity() {
         return arrayListOf(
             "PopMenu", "ExpandTextView", "FlexboxLayoutManager",
             "AutoWrapTextView", "Rotate", "AlphaRotate", "DialogAnimation", "SpringActivity",
-            "BounceViewPager", "TextViewStroke", "PopMenu", "behavior", "viewPageBehavior"
+            "BounceViewPager", "TextViewStroke", "PopMenu", "behavior", "viewPageBehavior","customPopupMeu",
+            "ShadowButton"
         )
     }
 
@@ -77,6 +80,8 @@ class GuideActivity : AppCompatActivity() {
             "PopMenu" -> startTargetActivity(PopMenuActivity::class)
             "behavior" -> startTargetActivity(FlingBehaviorActivity::class)
             "viewPageBehavior" -> startTargetActivity(ViewPagerFlingActivity::class)
+            "customPopupMeu" -> startTargetActivity(PopupWindowActivity::class)
+            "ShadowButton" -> startTargetActivity(ShadowButtonActivity::class)
         }
     }
 
