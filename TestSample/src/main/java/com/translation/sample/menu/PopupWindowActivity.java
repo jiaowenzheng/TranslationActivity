@@ -61,11 +61,11 @@ public class PopupWindowActivity extends AppCompatActivity implements View.OnCli
         mMenuIv = findViewById(R.id.iv_menu);
         mMenuBgView = findViewById(R.id.menu_bg);
         mMenuHomeIv = findViewById(R.id.iv_menu_home);
+        mMenuGrayBgView = findViewById(R.id.menu_gray_bg);
         mMenuSocialIv = findViewById(R.id.iv_menu_social);
         mMenuDiscoverIv = findViewById(R.id.iv_menu_discover);
         mMenuDiscoverView = findViewById(R.id.discover_layout);
 
-        mMenuGrayBgView = findViewById(R.id.menu_gray_bg);
 
         GradientDrawable drawable = new GradientDrawable();
         drawable.setColor(getResources().getColor(R.color.color_50_transparent));
@@ -90,18 +90,18 @@ public class PopupWindowActivity extends AppCompatActivity implements View.OnCli
                 int bottomMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,5,getResources().getDisplayMetrics());
                 int widthOffset = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,10,getResources().getDisplayMetrics());
 
-                int menuWidth = mMenuIv.getMeasuredWidth();
-                int menuHeight = mMenuIv.getMeasuredHeight();
+                int menuWidth = mMenuHomeIv.getMeasuredWidth();
+                int menuHeight = mMenuHomeIv.getMeasuredHeight();
 
                 int size = mMenuViewList.size();
                 mMenuMaxHeight = menuHeight * size + mMenuSpace * size;
 
                 mMenuGrayViewMaxHeight = mMenuMaxHeight + menuHeight + mMenuSpace + bottomMargin / 2;
 
-                mMenuMaxWidth = widthOffset + mMenuIv.getWidth();
-                mMenuMinWidth = mMenuIv.getWidth();
+                mMenuMaxWidth = widthOffset + menuWidth;
+                mMenuMinWidth = menuWidth;
 
-                mMaxBottomMargin = (mTabView.getHeight() - mMenuIv.getHeight()) / 2;
+                mMaxBottomMargin = (mTabView.getHeight() - menuHeight) / 2;
                 mMinBottomMargin = mMaxBottomMargin - bottomMargin;
 
                 ConstraintLayout.LayoutParams param = (ConstraintLayout.LayoutParams) mMenuGrayBgView.getLayoutParams();
@@ -109,8 +109,6 @@ public class PopupWindowActivity extends AppCompatActivity implements View.OnCli
                 param.height = menuHeight;
                 param.bottomMargin = mMaxBottomMargin;
                 mMenuGrayBgView.setLayoutParams(param);
-
-                Log.i("jiao","mMenuMaxHeight ="+menuHeight+" space="+mMenuSpace+" mMenuMaxHeight="+mMenuMaxHeight);
             }
         });
     }
@@ -149,8 +147,6 @@ public class PopupWindowActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
-
-
     private boolean checkMenuExpand(){
         if (mMenuDiscoverView.getVisibility() == View.VISIBLE
                 || mMenuHomeIv.getVisibility() == View.VISIBLE
@@ -172,7 +168,7 @@ public class PopupWindowActivity extends AppCompatActivity implements View.OnCli
 
         handler.postDelayed(() -> {
             closeMenuView();
-            heightAnimation(mMenuGrayViewMaxHeight,mMenuIv.getHeight());
+            heightAnimation(mMenuGrayViewMaxHeight,mMenuHomeIv.getHeight());
 
             bottomMarginAnimation(mMinBottomMargin,mMaxBottomMargin);
             showMenuViewAnimation(mMenuMaxWidth,mMenuMinWidth, false);
@@ -214,7 +210,7 @@ public class PopupWindowActivity extends AppCompatActivity implements View.OnCli
 
         //展开
         if (isExpand){
-            heightAnimation(mMenuIv.getHeight(),mMenuGrayViewMaxHeight);
+            heightAnimation(mMenuHomeIv.getHeight(),mMenuGrayViewMaxHeight);
             bottomMarginAnimation(mMaxBottomMargin,mMinBottomMargin);
             openMenuView();
         }
