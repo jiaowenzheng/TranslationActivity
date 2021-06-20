@@ -184,9 +184,9 @@ public class PopupWindowActivity extends AppCompatActivity implements View.OnCli
 
         handler.postDelayed(() -> {
             closeMenuView();
-            changeHeightAnimation(mMenuGrayViewMaxHeight,mMenuHomeIv.getHeight());
+            changeBackgroundHeightAnimation(mMenuGrayViewMaxHeight,mMenuHomeIv.getHeight());
 
-            changeBottomMarginAnimation(mMinBottomMargin,mMaxBottomMargin);
+            changeBackgroundBottomMarginAnimation(mMinBottomMargin,mMaxBottomMargin);
             showMenuViewAnimation(mMenuMaxWidth,mMenuMinWidth, false);
             mMenuBgView.setVisibility(View.GONE);
         },250);
@@ -243,7 +243,6 @@ public class PopupWindowActivity extends AppCompatActivity implements View.OnCli
 
 
     private void alphaMenuAnimation(View normalMenu,View pressedMenu,View lastNormalMenu,View lastPressedMenu){
-
         if (lastNormalMenu.getAlpha() == 0){
             alphaAnimation(lastNormalMenu,0,1);
             alphaAnimation(lastPressedMenu,1,0);
@@ -262,29 +261,24 @@ public class PopupWindowActivity extends AppCompatActivity implements View.OnCli
         objectAnimator.start();
     }
 
-    private void setMenuSelected(boolean firstSelected,boolean secondSelected,boolean threeSelected){
-        mMenuHomeIv.setSelected(firstSelected);
-        mMenuSocialIv.setSelected(secondSelected);
-        mMenuDiscoverIv.setSelected(threeSelected);
-    }
 
     private void showMenuViewAnimation(int startWidth, int endWidth, boolean isExpand){
         //改变menu 背景 宽度动画
-        changeWidthAnimation(startWidth,endWidth);
+        changeBackgroundWidthAnimation(startWidth,endWidth);
         //展开
         if (isExpand){
             //改变menu 背景高度
-            changeHeightAnimation(mMenuHomeIv.getHeight(),mMenuGrayViewMaxHeight);
+            changeBackgroundHeightAnimation(mMenuHomeIv.getHeight(),mMenuGrayViewMaxHeight);
             //改变menu 背景 距底部距离 设置bottomMargin
-            changeBottomMarginAnimation(mMaxBottomMargin,mMinBottomMargin);
+            changeBackgroundBottomMarginAnimation(mMaxBottomMargin,mMinBottomMargin);
             //向上平移三个 Menu 菜单
-            translationMenuAnimation();
+            openMenuAnimation();
         }
 
         this.isExpand = isExpand;
     }
 
-    private void changeWidthAnimation(int startWidth, int endWidth){
+    private void changeBackgroundWidthAnimation(int startWidth, int endWidth){
         ValueAnimator objectAnimator = ValueAnimator.ofInt(startWidth,endWidth);
         objectAnimator.addUpdateListener(animation -> {
             ViewGroup.LayoutParams params = mMenuGrayBgView.getLayoutParams();
@@ -296,7 +290,7 @@ public class PopupWindowActivity extends AppCompatActivity implements View.OnCli
         objectAnimator.start();
     }
 
-    private void changeHeightAnimation(int startHeight, int endHeight){
+    private void changeBackgroundHeightAnimation(int startHeight, int endHeight){
         ValueAnimator objectAnimator = ValueAnimator.ofInt(startHeight,endHeight);
         objectAnimator.addUpdateListener(animation -> {
             ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) mMenuGrayBgView.getLayoutParams();
@@ -311,7 +305,7 @@ public class PopupWindowActivity extends AppCompatActivity implements View.OnCli
         objectAnimator.start();
     }
 
-    private void changeBottomMarginAnimation(int startMargin, int endMargin){
+    private void changeBackgroundBottomMarginAnimation(int startMargin, int endMargin){
         ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) mMenuGrayBgView.getLayoutParams();
         ValueAnimator objectAnimator = ValueAnimator.ofInt(startMargin,endMargin);
         objectAnimator.addUpdateListener(animation -> {
@@ -323,7 +317,7 @@ public class PopupWindowActivity extends AppCompatActivity implements View.OnCli
     }
 
 
-    private void translationMenuAnimation(){
+    private void openMenuAnimation(){
         int size = mMenuViewList.size();
 
         for (int i = 0;i < size;i++){
