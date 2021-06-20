@@ -20,4 +20,49 @@
         app:layout_constraintTop_toTopOf="parent"
         />
 
+    <ImageView
+        android:id="@+id/iv_menu_1_pressed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_discover_menu_pressed"
+        app:layout_constraintLeft_toLeftOf="@id/iv_menu_1_normal"
+        app:layout_constraintRight_toRightOf="@id/iv_menu_1_normal"
+        app:layout_constraintTop_toTopOf="@id/iv_menu_1_normal"
+        app:layout_constraintBottom_toBottomOf="@id/iv_menu_1_normal"
+        />
+
+
+    <ImageView
+        android:id="@+id/iv_menu_1_normal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_discover_menu_normal"
+        app:layout_constraintVertical_bias="0.07"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <ImageView
+        android:id="@+id/iv_menu_2_pressed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_home_menu_pressed"
+        app:layout_constraintLeft_toLeftOf="@id/iv_menu_2_normal"
+        app:layout_constraintRight_toRightOf="@id/iv_menu_2_normal"
+        app:layout_constraintTop_toTopOf="@id/iv_menu_2_normal"
+        />
+
+    <ImageView
+        android:id="@+id/iv_menu_2_normal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_home_menu_normal"
+        android:layout_marginTop="140dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,5 @@
 package com.translation.sample.menu
 
-import android.animation.Animator
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.graphics.Color
@@ -11,17 +10,11 @@ import android.os.Handler
 import android.util.Log
 import android.util.TypedValue
 import android.view.View
-import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.view.animation.AccelerateDecelerateInterpolator
-import android.view.animation.Animation
 import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.animation.addListener
-import androidx.core.os.postDelayed
-import androidx.core.view.marginBottom
 import com.translation.sample.R
-import java.lang.reflect.TypeVariable
 
 
 class PopMenuActivity : AppCompatActivity() ,View.OnClickListener{
@@ -95,7 +88,7 @@ class PopMenuActivity : AppCompatActivity() ,View.OnClickListener{
         }
     }
 
-    private fun heightAnimation(targetView: View,startHeight: Int,endHeight: Int) {
+    private fun changeHeightAnimation(targetView: View, startHeight: Int, endHeight: Int) {
         val valueAnimator = ValueAnimator.ofInt(startHeight, endHeight)
         valueAnimator.addUpdateListener {
             val animatorValue = it.animatedValue.toString().toInt()
@@ -104,14 +97,6 @@ class PopMenuActivity : AppCompatActivity() ,View.OnClickListener{
             val params = targetView.layoutParams
             params.height = animatorValue
             targetView.layoutParams = params
-
-//            val radiusFraction = it.animatedFraction * radius
-//            val radius1 = it.animatedFraction / radius
-//            Log.i("jiao","radiusFraction$radiusFraction radius=$radius radius1=$radius1 resultRadius=$resultRadius")
-//            val gradient = targetView.background as GradientDrawable
-//            gradient.cornerRadius =
-//            targetView.background = gradient
-
         }
 
         valueAnimator.interpolator = AccelerateDecelerateInterpolator()
@@ -124,58 +109,34 @@ class PopMenuActivity : AppCompatActivity() ,View.OnClickListener{
         when(v?.id){
             R.id.black_bg -> {
                 if (blackBackgroundView.height >= maxHeight){
-                    heightAnimation(blackBackgroundView,maxHeight,minHeight)
+                    changeHeightAnimation(blackBackgroundView,maxHeight,minHeight)
                 }else{
-                    heightAnimation(blackBackgroundView,minHeight,maxHeight)
+                    changeHeightAnimation(blackBackgroundView,minHeight,maxHeight)
                 }
             }
             R.id.tv_pop_menu_1, R.id.tv_pop_menu_2,R.id.tv_pop_menu_3,R.id.tv_pop_menu_3-> {
-//                heightAnimation(blackBackgroundView,minHeight,maxHeight)
-//                toggleView()
-
-                widthAnimation()
+                changeWidthAnimation()
             }
         }
     }
 
-    private fun widthAnimation(){
+    private fun changeWidthAnimation(){
         val startWidth = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,90f,resources.displayMetrics).toInt()
         val endWidth = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,110f,resources.displayMetrics).toInt()
-        val margin = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,10f,resources.displayMetrics).toInt()
-        val offset = startWidth / endWidth
-
         val valueAnimator = ObjectAnimator.ofInt(startWidth, endWidth)
         valueAnimator.addUpdateListener {
-            val marginBottom = (1 - it.animatedFraction) * margin
             val params = blackBackgroundView.layoutParams as RelativeLayout.LayoutParams
             params.width = it.animatedValue as Int
             blackBackgroundView.layoutParams = params
-            Log.i("jiao"," valueAnimator endWidth=${it.animatedValue} marginBottom=$marginBottom")
         }
-        valueAnimator.addListener(object : Animator.AnimatorListener{
-            override fun onAnimationStart(animation: Animator?) {
-
-            }
-
-            override fun onAnimationEnd(animation: Animator?) {
-                heightAnimation(blackBackgroundView,minHeight,totalHeight + popMenu1View.height + 30)
-                toggleView()
-            }
-
-            override fun onAnimationCancel(animation: Animator?) {
-
-            }
-
-            override fun onAnimationRepeat(animation: Animator?) {
-
-            }
-
-        })
         valueAnimator.duration = 300
         valueAnimator.start()
+
+        changeHeightAnimation(blackBackgroundView,minHeight,totalHeight + popMenu1View.height + 30)
+        translationMenuAnimation()
     }
 
-    private fun toggleView(){
+    private fun translationMenuAnimation(){
         if (isExpand){
             closeMenuAnimation()
         }else{
