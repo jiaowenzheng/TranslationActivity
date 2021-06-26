@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.flexbox.*
 import com.translation.sample.animation.AlphaRotateActivity
 import com.translation.sample.animation.RotateActivity
+import com.translation.sample.animtator.ObjectAnimationActivity
 import com.translation.sample.auto_wrap_text.AutoWrapTextViewActivity
 import com.translation.sample.behavior.FlingBehaviorActivity
 import com.translation.sample.behavior.ViewPagerFlingActivity
@@ -61,7 +62,7 @@ class GuideActivity : AppCompatActivity() {
             "PopMenu", "ExpandTextView", "FlexboxLayoutManager",
             "AutoWrapTextView", "Rotate", "AlphaRotate", "DialogAnimation", "SpringActivity",
             "BounceViewPager", "TextViewStroke", "PopMenu", "behavior", "viewPageBehavior","customPopupMeu",
-            "ShadowButton"
+            "ShadowButton","ObjectAnimation"
         )
     }
 
@@ -82,6 +83,7 @@ class GuideActivity : AppCompatActivity() {
             "viewPageBehavior" -> startTargetActivity(ViewPagerFlingActivity::class)
             "customPopupMeu" -> startTargetActivity(PopupWindowActivity::class)
             "ShadowButton" -> startTargetActivity(ShadowButtonActivity::class)
+            "ObjectAnimation" -> startTargetActivity(ObjectAnimationActivity::class)
         }
     }
 

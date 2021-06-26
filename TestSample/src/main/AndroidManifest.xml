@@ -36,6 +36,7 @@
         <activity android:name=".shadow.ShadowButtonActivity"/>
         <activity android:name="com.translation.sample.behavior.FlingBehaviorActivity"/>
         <activity android:name="com.translation.sample.behavior.ViewPagerFlingActivity"/>
+        <activity android:name=".animtator.ObjectAnimationActivity"/>
     </application>
 
 </manifest>

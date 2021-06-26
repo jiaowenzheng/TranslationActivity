@@ -185,9 +185,10 @@ public class PopupWindowActivity extends AppCompatActivity implements View.OnCli
         handler.postDelayed(() -> {
             closeMenuView();
             changeBackgroundHeightAnimation(mMenuGrayViewMaxHeight,mMenuHomeIv.getHeight());
-
             changeBackgroundBottomMarginAnimation(mMinBottomMargin,mMaxBottomMargin);
-            showMenuViewAnimation(mMenuMaxWidth,mMenuMinWidth, false);
+            //改变menu 背景 宽度动画
+            changeBackgroundWidthAnimation(mMenuMaxWidth,mMenuMinWidth);
+            isExpand = false;
             mMenuBgView.setVisibility(View.GONE);
         },250);
     }
@@ -260,7 +261,6 @@ public class PopupWindowActivity extends AppCompatActivity implements View.OnCli
         objectAnimator.setDuration(200);
         objectAnimator.start();
     }
-
 
     private void showMenuViewAnimation(int startWidth, int endWidth, boolean isExpand){
         //改变menu 背景 宽度动画
